@@ -1,0 +1,632 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+
+
+<!-- content -->
+<section class="content">
+    <div class="content__head">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- content title -->
+                    <h2 class="content__title">New items</h2>
+                    <!-- end content title -->
+
+                    <!-- content tabs nav -->
+                    <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+                        
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">RECENT MOVIES</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">RECENT SERIES</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">TOP RATED MOVIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false">TOP RATED SERIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-6" role="tab" aria-controls="tab-6" aria-selected="false">NEWER MOVIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-7" role="tab" aria-controls="tab-7" aria-selected="false">NEWER SERIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-8" role="tab" aria-controls="tab-8" aria-selected="false">POPULAR MOVIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-9" role="tab" aria-controls="tab-9" aria-selected="false">POPULAR SERIES</a>
+                        </li>
+                        
+                        
+                    </ul>
+                    <!-- end content tabs nav -->
+
+                    <!-- content mobile tabs nav -->
+                    <div class="content__mobile-tabs" id="content__mobile-tabs">
+                        <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" value="New items">
+                            <span></span>
+                        </div>
+
+                        <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+                            <ul class="nav nav-tabs" role="tablist">
+                                
+
+                                <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-2" aria-selected="false">RECENT MOVIES</a></li>
+
+                                <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">TV SERIES</a></li>
+
+                                <li class="nav-item"><a class="nav-link" id="4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">CARTOONS</a></li>
+                                <li class="nav-item"><a class="nav-link" id="5-tab" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false">CARTOONS2</a></li>
+                                <li class="nav-item"><a class="nav-link" id="6-tab" data-toggle="tab" href="#tab-6" role="tab" aria-controls="tab-6" aria-selected="false">CARTOONS3</a></li>
+                                <li class="nav-item"><a class="nav-link" id="7-tab" data-toggle="tab" href="#tab-7" role="tab" aria-controls="tab-7" aria-selected="false">CARTOONS4</a></li>
+                                <li class="nav-item"><a class="nav-link" id="8-tab" data-toggle="tab" href="#tab-8" role="tab" aria-controls="tab-8" aria-selected="false">CARTOONS4</a></li>
+                                <li class="nav-item"><a class="nav-link" id="9-tab" data-toggle="tab" href="#tab-9" role="tab" aria-controls="tab-9" aria-selected="false">CARTOONS4</a></li>
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end content mobile tabs nav -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- content tabs -->
+        <div class="tab-content" id="myTabContent">
+            
+
+            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                <div class="row">
+                    {% for film in recentfilms %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                   
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
+                <div class="row">
+                    <!-- card -->
+                    {% for film in recentseries %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+
+                    <!-- end card -->
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="4-tab">
+                <div class="row">
+                    {% for film in topratefilms %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    <!-- end card -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-5" role="tabpanel" aria-labelledby="5-tab">
+                <div class="row">
+                    {% for film in toprateseries %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    
+                    <!-- end card -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-6" role="tabpanel" aria-labelledby="6-tab">
+                <div class="row">
+                    {% for film in newerfilms %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    
+                    <!-- end card -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-7" role="tabpanel" aria-labelledby="7-tab">
+                <div class="row">
+                    {% for film in newerseries %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    
+                    <!-- end card -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-8" role="tabpanel" aria-labelledby="8-tab">
+                <div class="row">
+                    {% for film in newerseries %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    
+                    <!-- end card -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-9" role="tabpanel" aria-labelledby="9-tab">
+                <div class="row">
+                    {% for film in newerseries %}
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{ film.thumbnail.url }}" alt="">
+                                <a href="#" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                                <span class="card__category">
+                                    {% for filmcat in film.category.all %}
+                                    <span class="card__category">
+                                    <a href="#">{{filmcat.title}}</a>
+                                    
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    {% endfor %}
+                    
+                    <!-- end card -->
+                </div>
+            </div>
+            
+        </div>
+        <!-- end content tabs -->
+    </div>
+</section>
+<!-- end content -->
+
+{% if films %}
+
+<section class="section section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <h2 class="section__title">Search Results Movie Found Just {{film_count}}</h2>
+            </div>
+            <!-- end section title -->
+
+            <!-- card -->
+            {% for film in films%}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end card -->
+
+            <!-- card -->
+            
+
+           
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if series %}
+
+<section class="section section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <h2 class="section__title">Search Results Serie Found Just {{series_count}}</h2>
+            </div>
+            <!-- end section title -->
+
+            <!-- card -->
+            {% for film in series %}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end card -->
+
+            <!-- card -->
+            
+
+           
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+<section class="section section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <h2 class="section__title">MOST LIKED MOVIES</h2>
+            </div>
+            <!-- end section title -->
+            {% for film in likedfilms %}
+
+            <!-- card -->
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+            {% endfor %}
+
+            <!-- card -->
+            
+           
+        </div>
+    </div>
+</section>
+<section class="section section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <h2 class="section__title">MOST LIKED SERIES</h2>
+            </div>
+            <!-- end section title -->
+
+            <!-- card -->
+            {% for film in likedseries %}
+
+            <!-- card -->
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+            {% endfor %}
+            <!-- end card -->
+
+            <!-- card -->
+            
+            <!-- end card -->
+
+            <!-- section btn -->
+            
+            <!-- end section btn -->
+        </div>
+    </div>
+</section>
+<!-- expected premiere -->
+
+{% if user.is_authenticated %}
+<section class="section section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <h2 class="section__title">Watch List</h2>
+            </div>
+            <!-- end section title -->
+
+            <!-- card -->
+            {% for film in watchlist.favorites.all %}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for film in watchlist.favoritesseries.all %}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ film.thumbnail.url }}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{ film.get_url}}">{{ film.name }}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <span class="card__category">
+                            <a href="#">{{filmcat.title}}</a>
+                            
+                            </span>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rate }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end card -->
+
+            <!-- card -->
+            
+            <!-- end card -->
+
+            <!-- section btn -->
+            <div class="col-12">
+                <a href="#" class="section__btn">Show more</a>
+            </div>
+            <!-- end section btn -->
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
+

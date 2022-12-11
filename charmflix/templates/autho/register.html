@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Register
+{% endblock title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body class="body">
+
+	<div class="sign section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="sign__content">
+						<!-- registration form -->
+						<form action="{% url 'register' %}" class="sign__form" method="POST">
+							{% csrf_token %}
+							<a href="index.html" class="sign__logo">
+								<img src="img/logo.svg" alt="">
+							</a>
+
+							<div class="sign__group">
+								<input type="text" name="username" class="sign__input" placeholder="Username">
+							</div>
+
+							<div class="sign__group">
+								<input type="text" name="first_name" class="sign__input" placeholder="Name">
+							</div>
+							
+							<div class="sign__group">
+								<input type="text" name="last_name" class="sign__input" placeholder="Last Name">
+							</div>
+
+							<div class="sign__group">
+								<input type="text" name="email" class="sign__input" placeholder="Email">
+							</div>
+
+							<div class="sign__group">
+								<input type="password" name="password1" class="sign__input" placeholder="Password">
+							</div>
+							
+							<div class="sign__group">
+								<input type="password" name="password2" class="sign__input" placeholder=" Confirm Password">
+							</div>
+
+							<div class="sign__group sign__group--checkbox">
+								<input id="remember" name="remember" type="checkbox" checked="checked">
+								<label for="remember">I agree to the <a href="#">Privacy Policy</a></label>
+							</div>
+							
+							<button class="sign__btn" type="submit" >Sign up</button>
+
+							<span class="sign__text">Already have an account? <a href="{% url 'login' %}">Login!</a></span>
+						</form>
+						<!-- registration form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+
+</html>
+{% endblock %}

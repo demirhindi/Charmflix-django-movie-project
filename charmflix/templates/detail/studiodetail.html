@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Actor
+{% endblock title %}
+
+{% block content %}
+
+<section class="section details">
+    <!-- details background -->
+    <div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
+    <!-- end details background -->
+
+    <!-- details content -->
+    <div class="container">
+        
+        <div class="row">
+            <!-- title -->
+            <div class="col-12">
+                
+                <h1 class="details__title">{{portsquery.name}}</h1>
+                
+            </div>
+            <!-- end title -->
+
+            <!-- content -->
+            <div class="col-12 col-xl-12">
+                <div class="card card--details">
+                    <div class="row">
+                        <!-- card cover -->
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+                            <div class="card__cover">
+                                <img src="{{portsquery.logo.url}}" alt="">
+                            </div>
+                        </div>
+                        <!-- end card cover -->
+
+                        <!-- card content -->
+                        <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+                            <div class="card__content">
+                                <div class="card__wrap">
+                                    
+
+                                    <ul class="card__list">
+                                        
+                                    </ul>
+                                </div>
+
+                                <ul class="card__meta">
+                                    
+                                    <li><span>Birth year:</span> {{portsquery.sinceyear}}</li>
+                                    
+                                    <li><span>Country:</span> <a href="#">{{portsquery.itfrom}}</a> </li>
+                                </ul>
+
+                                <div class="card__description card__description--details">
+                                    {{portsquery.desc}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card content -->
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+
+            <!-- player -->
+            
+            <!-- end player -->
+
+            <div class="col-12">
+                <div class="details__wrap">
+                    <!-- availables -->
+                    
+                    <!-- end availables -->
+
+                    <!-- share -->
+                    <div class="details__share">
+                        <span class="details__share-title">Share with friends:</span>
+
+                        <ul class="details__share-list">
+                            <li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
+                            <li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
+                            <li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
+                            <li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- end share -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- end details content -->
+</section>
+<!-- end details -->
+
+<div class="catalog">
+    <div class="container">
+        <div class="row">
+            <!-- card -->
+            {% for film in pagedfilms %}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{film.thumbnail.url}}" alt="">
+                        <a href="#" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{{film.get_url}}">{{film.name}}</a></h3>
+                        <span class="card__category">
+                            {% for filmcat in film.category.all %}
+                            <a href="#">{{filmcat.title}}</a>
+                            {% endfor %}
+                            
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{film.rate}}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end card -->
+
+
+
+
+            <!-- paginator -->
+            <div class="col-12">
+                {% if pagedfilms.has_other_pages %}
+                <ul class="paginator paginator--list">
+                    {% if pagedfilms.has_previous %}
+                    <li class="paginator__item paginator__item--prev">
+                        <a href="?page={{pagedfilms.previous_page_number}}"><i class="icon ion-ios-arrow-back"></i></a>
+                    </li>
+                    {% endif %}
+                    {% for i in pagedfilms.paginator.page_range %}
+                        {% if pagedfilms.number == i %}
+                        <li class="paginator__item paginator__item--active"><a href="#">{{i}}</a></li>
+                        {% else %}
+                        <li class="paginator__item"><a href="?page={{i}}">{{i}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if pagedfilms.has_next %}
+                    <li class="paginator__item paginator__item--next">
+                        <a href="?page={{pagedfilms.next_page_number}}"><i class="icon ion-ios-arrow-forward"></i></a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+            <!-- end paginator -->
+        </div>
+    </div>
+</div>
+<!-- end catalog -->
+
+{% endblock %}
